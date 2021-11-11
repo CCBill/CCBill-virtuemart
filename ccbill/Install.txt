@@ -1,0 +1,153 @@
+
+=== Installation ===
+
+The CCBill VirtueMart billing module enables easy integration of your CCBill account within the VirtueMart e-commerce platform.  Installation involves the following steps:
+ -Installing the CCBill payment module for VirtueMart
+ -Configuring your CCBill account for use with VirtueMart
+ -Configuring the module with your CCBill account information
+
+
+=== Installing the Extension ===
+
+The CCBill VirtueMart module is installed via the Joomla Extension Manager.  From the Joomla Admin interface, select Extensions -> Extension Manager from the top menu, then select Upload Package File from the top tabs.  Select the CCBill VirtueMart zip file and click Upload & Install.
+When installation is complete, “VMPayment - CCBill” will display in the extensions list.
+
+
+=== Configuring Your CCBill Account ===
+
+Before using the plugin, it’s necessary to configure a few things in your CCBill account.  Please ensure the CCBill settings are correct, or the payment module will not work.
+
+
+=== Enabling Dynamic Pricing ===
+
+Please work with your CCBill support representative to activate “Dynamic Pricing” for your account.  You can verify that dynamic pricing is active by selecting “Feature Summary” under the “Account Info” tab of your CCBill admin menu.  Dynamic pricing status appears at the bottom of the “Billing Tools” section.
+
+
+=== Creating a Salt / Encryption Key ===
+
+A “salt” is a string of random data used to make your encryption more secure.  You must contact CCBill Support to generate your salt.  Once set, it will be visible under the “Advanced” section of the “Sub Account Admin” menu.  It will appear in the “Encryption Key” field of the “Upgrade Security Setup Information” section.
+
+
+=== Disabling User Management ===
+
+Since this account will be used for dynamic pricing transactions rather than managing user subscription, user management must be disabled.
+
+In your CCBill admin interface, navigate to “Sub Account Admin” and select “User Management” from the left menu.  Select “Turn off User Management” in the top section.
+
+Under “Username Settings,” select “Do Not Collect Usernames and Passwords.”
+
+
+=== Creating a New Billing Form ===
+
+The billing form is the CCBill form that will be displayed to customers after they choose to check out using CCBill.  The billing form accepts customer payment information, processes the payment, and returns the customer to your VirtueMart store where a confirmation message is displayed.
+
+To create a billing form for use with VirtueMart, navigate to the “Form Admin” section of your CCBill admin interface.  All existing forms will be displayed in a table.
+Click “Create New Form” in the left menu to create your new form.
+Select the appropriate option under “Billing Type.”  (In most cases, this will be “Credit Card.”)
+
+Select “Standard” under “Form Type” unless you intend to customize your form.
+
+Select the desired layout, and click “Submit” at the bottom of the page.
+
+Your new form has been created, and is visible in the table under “View All Forms.”  In this example, our new form is named “201cc.”  Be sure to note the name of your new form, as it will be required in the VirtueMart configuration section.
+
+
+=== Configuring the New Billing Form ===
+
+Click the title of the newly-created form to edit it.  In the left menu, click “Basic.”
+
+Under “Basic,” select an Approval Redirect Time of 3 seconds, and a Denial Redirect Time of “None.”
+
+
+=== Configuring Your CCBill Account ===
+
+In your CCBill admin interface, navigate to “Sub Account Admin” and select “Basic” from the left menu.
+
+= Site Name =
+
+Enter the URL of your VirtueMart store under “Site Name”
+
+= Approval URL =
+
+Under Approval URL, enter the base URL for your VirtueMart store, followed by:
+
+index.php?layout=details&view=orders&option=com_virtuemart&charset=utf-8&order_number=%%order_number%%&order_pass=%%order_pass%%
+
+For example, if your VirtueMart store is located at http://www.test.com, the Approval URL would be:
+
+http://www.test.com/index.php?layout=details&view=orders&option=com_virtuemart&charset=utf-8&order_number=%%order_number%%&order_pass=%%order_pass%%
+
+= Denial URL =
+
+Under Denial URL, enter the base URL for your VirtueMart store, followed by:
+
+/index.php?option=com_virtuemart&view=cart
+
+For example, if your VirtueMart store is located at http://www.test.com, the Denial URL would be:
+
+http://www.test.com/index.php?option=com_virtuemart&view=cart
+
+= Redirect Time =
+
+Select an approval redirect time of 3 seconds, and a denial redirect time of “None.”
+
+
+= Background POST - Approval =
+
+Under Advanced form settings, Background POST Denial URL, enter the base URL for your VirtueMart store, followed by:
+
+/index.php?option=com_virtuemart&view=pluginresponse&task=pluginnotification&tmpl=component
+
+= Background POST - Denial =
+
+Under Advanced form settings, Background POST Denial URL, enter the base URL for your VirtueMart store, followed by:
+
+/index.php?option=com_virtuemart&view=pluginresponse&task=pluginnotification&tmpl=component
+
+
+=== Confirmation ===
+Your CCBill account is now configured. In your CCBill admin interface, navigate to “Sub Account Admin” and ensure the information displayed is correct.
+
+
+=== Creating a Payment Method ===
+
+After the extension has been installed, a payment method must be created.  Selected Components -> VirtueMart -> Payment Methods from the top menu.  Click the “New” button at the top to create a new payment method.  Configure your payment method as shown and click Save.
+
+Payment Name: CCBill
+Sef Alias: ccbill
+Published: Yes
+Payment Description: Pay with your credit card with CCBill
+Payment Method: VMPayment - CCBill
+Shopper Group: Available for all [default]
+List Order: 1
+
+
+=== CCBill Options ===
+
+= Enable CCBill =
+Check the top box to enable payments with CCBIll standard.
+
+= Client Account Number =
+Enter your CCBill client account number.
+
+= Client SubAccount Number =
+Enter your CCBill client sub-account number.
+
+= Form Name =
+Enter the name of the form created during CCBill account configuration.
+
+= Currency =
+Select the billing currency.  Ensure this selection matches the selection made in the “Localization -> Currencies” section of the VirtueMart administration menu.
+
+= Salt =
+Enter your salt / encryption key obtained during CCBill configuration.
+Click “Update” at the bottom of the CCBill configuration section.
+
+= Min Amount and Max Amount =
+Leave these fields blank
+
+= Cost Per Transaction and Cost Percent Total =
+Enter zero (“0”) for both of these fields.
+
+=== Confirmation ===
+You are now ready to process payments via CCBill!  Please conduct a few test transactions (using test data provided by CCBill) to ensure proper operation before enabling live billing mode in your CCBill account.

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension version="2.5" type="plugin" group="vmpayment" method="upgrade">
+    <name>VMPayment - CCBill</name>
+    <creationDate>September 10 2018</creationDate>
+    <author>CCBill</author>
+    <authorUrl>http://ccbill.com</authorUrl>
+    <copyright>Copyright (C) 2015-2021 CCBill. All rights reserved.</copyright>
+    <license></license>
+    <version>3.7.0.0</version>
+    <description>CCBill</description>
+    <languages folder="language">
+        <language tag="en-GB">en-GB/en-GB.plg_vmpayment_ccbill.ini</language>
+    </languages>
+    <files>
+        <filename plugin="ccbill">ccbill.php</filename>
+        <folder>ccbill</folder>
+        <folder>language</folder>
+    </files>
+
+    <vmconfig>
+        <fields name="params">
+            <fieldset name="basic">
+
+              <field name="account_no" type="text" size="6" default=""
+                     label="VMPAYMENT_CCBILL_ACCOUNT_NO" description="VMPAYMENT_CCBILL_ACCOUNT_NO_DESC"/>
+
+              <field name="subaccount_no" type="text" size="4" default=""
+                     label="VMPAYMENT_CCBILL_SUBACCOUNT_NO" description="VMPAYMENT_CCBILL_SUBACCOUNT_NO_DESC"/>
+
+              <field name="form_name" type="text" size="20" default=""
+                     label="VMPAYMENT_CCBILL_FORM_NAME" description="VMPAYMENT_CCBILL_FORM_NAME_DESC"/>
+
+              <field name="is_flexform" type="list" default="no" label="VMPAYMENT_CCBILL_IS_FLEXFORM"
+                     description="VMPAYMENT_CCBILL_IS_FLEXFORM_DESC">
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+              </field>
+
+              <field name="currency_code" type="list" default="840" label="VMPAYMENT_CCBILL_CURRENCY_CODE"
+                     description="VMPAYMENT_CCBILL_CURRENCY_CODE_DESC">
+                  <option value="840">USD</option>
+                  <option value="978">EUR</option>
+                  <option value="036">AUD</option>
+                  <option value="124">CAD</option>
+                  <option value="826">GBP</option>
+                  <option value="392">JPY</option>
+              </field>
+
+              <field name="salt" type="text" size="30" default=""
+                     label="VMPAYMENT_CCBILL_SALT" description="VMPAYMENT_CCBILL_SALT_DESC"/>
+
+              <field name="payment_logos" type="vmfiles" scope="com_virtuemart" label="VMPAYMENT_CCBILL_LOGOS"
+                     description="VMPAYMENT_CCBILL_LOGOS_DESC" directory="/images/stories/virtuemart/payment"
+                     default="default" hide_default="1" hide_none="1" stripext="0" exclude="^_"/>
+
+              <!-- Restrictions -->
+              <!-- ============ -->
+              <field name="countries" type="vmcountries" scope="com_virtuemart" default=""
+                     label="VMPAYMENT_CCBILL_COUNTRIES" description="VMPAYMENT_CCBILL_COUNTRIES_DESC"/>
+              <field name="min_amount" type="text" label="VMPAYMENT_CCBILL_MIN_AMOUNT"
+                     description="VMPAYMENT_CCBILL_MIN_AMOUNT_DESC"/>
+              <field name="max_amount" type="text" label="VMPAYMENT_CCBILL_MAX_AMOUNT"
+                     description="VMPAYMENT_CCBILL_MAX_AMOUNT_DESC"/>
+
+
+              <!-- Discounts -->
+              <!-- ============ -->
+              <field name="cost_per_transaction" type="text" label="VMPAYMENT_CCBILL_COST_PER_TRANSACTION"
+                     description="VMPAYMENT_CCBILL_COST_PER_TRANSACTION_DESC"/>
+              <field name="cost_percent_total" type="text" label="VMPAYMENT_CCBILL_COST_PERCENT_TOTAL"
+                     description="VMPAYMENT_CCBILL_COST_PERCENT_TOTAL_DESC"/>
+              <field name="tax_id" type="vmtaxes" scope="com_virtuemart" label="VMPAYMENT_CCBILL_TAX"
+                     description="VMPAYMENT_CCBILL_TAX_DESC"/>
+            </fieldset>
+        </fields>
+    </vmconfig>
+    <updateservers>
+        <!-- Note: No spaces or linebreaks allowed between the server tags -->
+        <!--
+        <server type="extension" name="VirtueMart plg_vmpayment_ccbill Update Site"><![CDATA[http://virtuemart.net/releases/vm3/plg_vmpayment_CCBILL_update.xml]]></server>
+        -->
+    </updateservers>
+
+</extension>
